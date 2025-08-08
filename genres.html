@@ -167,8 +167,9 @@
   // Apply correct logic based on screen and page
   // Always load genres on genres.html (even on mobile)
 if (window.location.pathname.includes("genres.html")) {
-  import('./script/movies.js').then(({ movies }) => {
+  import('script/movies.js').then(({ movies }) => {
     const genresContainer = document.getElementById("genresContainer");
+
 
 
     function createGenreSection(genre, moviesList) {
@@ -241,4 +242,5 @@ if (window.location.pathname.includes("genres.html")) {
     });
   }
 </script>
+
 
