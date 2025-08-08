@@ -108,61 +108,61 @@
 
   // Live filter logic for desktop (genres.html)
   function setupLiveFiltering(inputEl) {
-    import('./script/movies.js').then(({ movies }) => {
-      const genresContainer = document.getElementById("genresContainer");
+  import('./script/movies.js').then(({ movies }) => {
+    const genresContainer = document.getElementById("genresContainer");
 
-      function createGenreSection(genre, moviesList) {
-        return `
-          <section>
-            <h2 class="text-3xl font-bold mb-4 text-red-400 capitalize">${genre.replace("-", " ")}</h2>
-            <div class="overflow-x-auto">
-              <div class="flex space-x-6 pb-4">
-                ${moviesList.map(movie => `
-                  <a href="../movies/movie.html?id=${movie.id}" class="min-w-[200px] max-w-xs bg-gray-900 border border-gray-700 rounded-lg overflow-hidden shadow-md hover:shadow-red-500/30 transition duration-300">
-                    <div class="h-48 bg-gray-800 flex items-center justify-center">
-                      <img src="${movie.poster}" alt="${movie.title}" class="h-full object-cover w-full"/>
-                    </div>
-                    <div class="p-4">
-                      <h3 class="text-xl font-semibold mb-1 text-white">${movie.title}</h3>
-                      <p class="text-gray-400 text-sm">${movie.description}</p>
-                    </div>
-                  </a>
-                `).join("")}
-              </div>
+    function createGenreSection(genre, moviesList) {
+      return `
+        <section>
+          <h2 class="text-3xl font-bold mb-4 text-red-400 capitalize">${genre.replace("-", " ")}</h2>
+          <div class="overflow-x-auto">
+            <div class="flex space-x-6 pb-4">
+              ${moviesList.map(movie => `
+                <a href="movie.html?id=${movie.id}" class="min-w-[200px] max-w-xs bg-gray-900 border border-gray-700 rounded-lg overflow-hidden shadow-md hover:shadow-red-500/30 transition duration-300">
+                  <div class="h-48 bg-gray-800 flex items-center justify-center">
+                    <img src="${movie.poster}" alt="${movie.title}" class="h-full object-cover w-full"/>
+                  </div>
+                  <div class="p-4">
+                    <h3 class="text-xl font-semibold mb-1 text-white">${movie.title}</h3>
+                    <p class="text-gray-400 text-sm">${movie.description}</p>
+                  </div>
+                </a>
+              `).join("")}
             </div>
-          </section>
-        `;
-      }
+          </div>
+        </section>
+      `;
+    }
 
-      function renderGenres(filteredMovies = movies) {
-        genresContainer.innerHTML = "";
-        const genres = [...new Set(filteredMovies.map(m => m.primaryGenre))];
-        genres.forEach(genre => {
-          const moviesInGenre = filteredMovies.filter(m => m.primaryGenre === genre);
-          if (moviesInGenre.length > 0) {
-            genresContainer.innerHTML += createGenreSection(genre, moviesInGenre);
-          }
-        });
-      }
-
-      renderGenres(); // Initial render
-
-      inputEl.addEventListener("input", () => {
-        const query = inputEl.value.toLowerCase();
-        if (!query) {
-          renderGenres();
-          return;
+    function renderGenres(filteredMovies = movies) {
+      genresContainer.innerHTML = "";
+      const genres = [...new Set(filteredMovies.map(m => m.primaryGenre))];
+      genres.forEach(genre => {
+        const moviesInGenre = filteredMovies.filter(m => m.primaryGenre === genre);
+        if (moviesInGenre.length > 0) {
+          genresContainer.innerHTML += createGenreSection(genre, moviesInGenre);
         }
-
-        const filtered = movies.filter(movie =>
-          movie.title.toLowerCase().includes(query) ||
-          (movie.genres || []).some(g => g.toLowerCase().includes(query)) ||
-          movie.primaryGenre.toLowerCase().includes(query)
-        );
-        renderGenres(filtered);
       });
+    }
+
+    renderGenres();
+
+    inputEl.addEventListener("input", () => {
+      const query = inputEl.value.toLowerCase();
+      if (!query) {
+        renderGenres();
+        return;
+      }
+      const filtered = movies.filter(movie =>
+        movie.title.toLowerCase().includes(query) ||
+        (movie.genres || []).some(g => g.toLowerCase().includes(query)) ||
+        movie.primaryGenre.toLowerCase().includes(query)
+      );
+      renderGenres(filtered);
     });
-  }
+  });
+}
+
 
   // Apply correct logic based on screen and page
   // Always load genres on genres.html (even on mobile)
@@ -242,6 +242,7 @@ if (window.location.pathname.includes("genres.html")) {
     });
   }
 </script>
+
 
 
 
