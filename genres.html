@@ -167,10 +167,8 @@
   // Apply correct logic based on screen and page
   // Always load genres on genres.html (even on mobile)
 if (window.location.pathname.includes("genres.html")) {
-  import('script/movies.js').then(({ movies }) => {
+  import('./script/movies.js').then(({ movies }) => {
     const genresContainer = document.getElementById("genresContainer");
-
-
 
     function createGenreSection(genre, moviesList) {
       return `
@@ -179,7 +177,7 @@ if (window.location.pathname.includes("genres.html")) {
           <div class="overflow-x-auto">
             <div class="flex space-x-6 pb-4">
               ${moviesList.map(movie => `
-                <a href="../movies/movie.html?id=${movie.id}" class="min-w-[200px] max-w-xs bg-gray-900 border border-gray-700 rounded-lg overflow-hidden shadow-md hover:shadow-red-500/30 transition duration-300">
+                <a href="movies/movie.html?id=${movie.id}" class="min-w-[200px] max-w-xs bg-gray-900 border border-gray-700 rounded-lg overflow-hidden shadow-md hover:shadow-red-500/30 transition duration-300">
                   <div class="h-48 bg-gray-800 flex items-center justify-center">
                     <img src="${movie.poster}" alt="${movie.title}" class="h-full object-cover w-full"/>
                   </div>
@@ -206,9 +204,9 @@ if (window.location.pathname.includes("genres.html")) {
       });
     }
 
-    renderGenres(); // Always render on page load
+    renderGenres();
 
-    // Live filtering (only if input field exists)
+    // Search filter
     if (searchInput) {
       searchInput.addEventListener("input", () => {
         const query = searchInput.value.toLowerCase();
@@ -242,6 +240,7 @@ if (window.location.pathname.includes("genres.html")) {
     });
   }
 </script>
+
 
 
 
