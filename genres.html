@@ -108,7 +108,7 @@
 
   // Live filter logic for desktop (genres.html)
   function setupLiveFiltering(inputEl) {
-    import('../script/movies.js').then(({ movies }) => {
+    import('./script/movies.js').then(({ movies }) => {
       const genresContainer = document.getElementById("genresContainer");
 
       function createGenreSection(genre, moviesList) {
@@ -242,6 +242,7 @@ if (window.location.pathname.includes("genres.html")) {
     });
   }
 </script>
+
 
 
 
