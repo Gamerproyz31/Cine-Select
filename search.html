@@ -85,8 +85,8 @@
   </script>
 
   <!-- ✅ Movie Search Script -->
-  <script type="module">
-  import { movies } from '../script/movies.js';
+  <script type="module"> 
+  import { movies } from './script/movies.js';
 
   const resultsContainer = document.getElementById("resultsContainer");
   const noResults = document.getElementById("noResults");
@@ -113,7 +113,7 @@
     } else {
       matched.forEach(movie => {
         const card = document.createElement("a");
-        card.href = `../movies/movie.html?id=${movie.id}`;
+        card.href = `movies/movie.html?id=${movie.id}`;
         card.className = "bg-gray-900 border border-gray-700 rounded-lg overflow-hidden shadow-md hover:shadow-red-500/30 transition duration-300";
 
         card.innerHTML = `
@@ -190,3 +190,4 @@
   }
 
 </script>
+
